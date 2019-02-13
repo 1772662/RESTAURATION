@@ -23,9 +23,8 @@ public class MainPartie2 {
 			}
 		}
 		return prix;
-	}
-	
-	// get les clients a partir du fichier text
+		
+			// get les clients a partir du fichier text
 	public static Client [] liresClients (byte []bytes){
 		Client [] clients = new Client [NB_MAX];
 		try{
@@ -44,8 +43,7 @@ public class MainPartie2 {
 		}
 		return clients;
 	}
-	
-	// get Plats du fichier text
+		// get Plats du fichier text
 	public static Plat []  liresPlats (byte []bytes){
 		
 		Plat [] platsList = new Plat [NB_MAX];
@@ -66,36 +64,29 @@ public class MainPartie2 {
 		}
 		return platsList;
 	}
+		
+	}
 	
 
-	// get les commandes du fichier text 
-	public static Commande []  liresCommandes (byte []bytes){
-		
-		Commande [] CommandesList = new Commande [NB_MAX];
-		
-		try{
-			String text = new String (bytes);
-			String com = text.substring(text.indexOf("Commandes :"),text.lastIndexOf("Fin"));
-			String  [] listesCommandes = com.split("\r\n");
-			
-			for(int i=1; i<listesCommandes.length ;i++){
-				
-				String cli  = listesCommandes[i].split(" ")[0] ;
-				String nomPlat = listesCommandes[i].split(" ")[1] ;
-				String qte  = listesCommandes[i].split(" ")[2] ;
-		
-				Client cliobj = new Client(cli) ;
-			    Commande cmd = new Commande (cliobj,nomPlat, Integer.parseInt(qte)) ; 
-			    
-			    CommandesList[i-1] = cmd; 		
-				
-			}
-		
-		}catch(Exception e){
 
-			return null; 
-		}
-		return CommandesList;
-	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
