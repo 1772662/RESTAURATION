@@ -23,7 +23,7 @@ public class MainPartie2 {
 			}
 		}
 		return prix;
-		
+	}
 			// get les clients a partir du fichier text
 	public static Client [] liresClients (byte []bytes){
 		Client [] clients = new Client [NB_MAX];
@@ -95,5 +95,5 @@ public class MainPartie2 {
 		return CommandesList;
 		
 		}
-	}
+	
 }
