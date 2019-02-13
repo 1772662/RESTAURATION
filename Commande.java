@@ -15,6 +15,15 @@ public class Commande {
 
 	}
 
-	
+	public String getnomClient () {
+		return  this.client.getNom() ;
+	}
+	public String getnomPlat () {
+		return  this.nomPlat ;
+		}
+	public int getQte () {
+		return  this.quantite ;
+		}
+		
 }
 	
