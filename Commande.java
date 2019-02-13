@@ -9,20 +9,20 @@ public class Commande {
 	}
 
 	public Commande(Client client, String  nomPlat, int quantite) {
-		this.client = client;
-		this.nomPlat = nomPlat;
-		this.quantite = quantite;
+			this.client = client;
+			this.nomPlat = nomPlat;
+			this.quantite = quantite;
 
 	}
 
 	public String getnomClient () {
-		return  this.client.getNom() ;
+			return  this.client.getNom() ;
 	}
 	public String getnomPlat () {
-		return  this.nomPlat ;
+			return  this.nomPlat ;
 		}
 	public int getQte () {
-		return  this.quantite ;
+			return  this.quantite ;
 		}
 		
 }
