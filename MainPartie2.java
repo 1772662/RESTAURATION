@@ -136,5 +136,30 @@ public class MainPartie2 {
 		return CommandesList;
 		
 		}
+		
+		
+			// verifier que toutes les clients de la commande  exist dans la list des clients 
+	public static boolean  Erreur(Commande [] com ,Client [] cli ) 
+	 {
+		boolean trouve =false ;
+		for (int l=0;  l<com.length  && com[l] != null ;l++) 
+		{
+			trouve = false;
+			String nomClient =com[l].getnomClient() ;
+			 for (int k=0;k<cli.length  && cli[k] !=null  ;k++)
+			 {
+				 if (nomClient.equals(cli[k].getNom())) 
+				 {
+					 trouve = true;
+					 break;
+				 }
+			 }
+			 if (!trouve) 
+			 {
+				 break; 
+			 }
+		}
+		return trouve;
+	}
 	
 }
