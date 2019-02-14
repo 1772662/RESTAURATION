@@ -1,3 +1,11 @@
+
+/*
+ * MainPartie2
+*
+ * Version info
+ *
+ * Copyright Loic Voyer Amina Atmane
+ */
 public class MainPartie2 {
 
 	private static final int NB_MAX = 30 ;  
