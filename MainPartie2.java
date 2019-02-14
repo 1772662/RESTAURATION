@@ -6,6 +6,47 @@ public class MainPartie2 {
 		Client [] clients = new Client [NB_MAX];
 		Plat []   plats = new Plat [NB_MAX];
 		Commande [] commandes = new Commande [NB_MAX];
+		
+		try{
+			File file = new File("Test.txt");
+			FileInputStream fis = new FileInputStream(file);
+			byte [] bytes = new byte[(int)file.length()];
+			fis.read(bytes);
+			fis.close();
+					
+			clients = liresClients(bytes) ;
+			plats = liresPlats(bytes) ;
+			commandes = liresCommandes(bytes) ;
+			// si il n ya pas  de commandes ou des erruers dans les commandes 
+			if (commandes != null  && Erreur(commandes, clients)  )
+			{
+			for (int i=0;  i<clients.length  && clients[i] != null ;i++) 
+			{
+				double totalFacture = 0.0;
+				String nomClient = clients[i].getNom() ; 
+		
+				for (int l=0;  l<commandes.length  && commandes[l] != null ;l++) 
+					{
+					if (commandes[l].getnomClient().equals(nomClient) )
+					{ 
+						int qte = commandes[l].getQte() ;
+						String nomPlat = commandes[l].getnomPlat() ;
+						double prix = getPrixduPlat(nomPlat,plats) ;  
+						totalFacture += (qte* prix) ;
+					}
+				}
+				System.out.println(nomClient + " " + totalFacture +"$" ) ;
+			}
+			
+			}
+			else
+			{    // message d'erreur dans les commandes 
+					System.out.println("Le fichier ne respecte pas le format demandé !" ) ;
+			}
+		}
+		catch (Exception e){
+			System.out.println(e.toString());
+		}
 	
 	}
 	
