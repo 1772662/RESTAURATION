@@ -15,11 +15,19 @@ public class Plat {
 		this.nomPlat = nomPlat;
 		this.prix = prix;
 		
+		
 		if (prix <= 0) {
-			throw new PlatException("Le prix du plat ne peut pas être de zéro ou ou négatif.");
-		} else if (!this.nomPlat.matches("/[a-zA-Z]")) {
-			throw new PlatException("Le format du nom du plat n’est pas respecté.");
+			throw new PlatException("Le prix du plat ne peut pas être de zéro ou ou négatif.\n");
+		} else if (prix >= 5000) {
+			throw new PlatException("Le prix du plat ne peut pas dépasser 5000.\n");
+		} else if (nomPlat.length() >= 20) {
+			throw new PlatException("Le nom du plat ne peut dépasser 20 caractères.\n");
+		} else if (nomPlat.length() == 0) {
+			throw new PlatException("Le nom du plat doit avoir plus de 0 caractères.\n");
 		}
+//		else if (this.nomPlat.matches("[A-Za-z]")) {
+//			throw new PlatException("Le format du nom du plat n’est pas respecté.\n");
+//		}
 
 	}
 
