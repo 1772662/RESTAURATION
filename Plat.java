@@ -30,6 +30,7 @@ public class Plat {
 //		}
 
 	}
+	
 
 	public void setNomPlat(String nomPlat) {
 		this.nomPlat = nomPlat;
