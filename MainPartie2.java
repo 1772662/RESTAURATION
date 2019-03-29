@@ -1,6 +1,11 @@
-import java.io.File;
-import java.io.FileInputStream;
 
+/*
+ * MainPartie2
+*
+ * Version info
+ *
+ * Copyright Loic Voyer Amina Atmane
+ */
 public class MainPartie2 {
 
 	private static final int NB_MAX = 30 ;  
@@ -44,12 +49,13 @@ public class MainPartie2 {
 			}
 			else
 			{    // message d'erreur dans les commandes 
-					System.out.println("Le fichier ne respecte pas le format demandé !" ) ;
+					System.out.println("Le fichier ne respecte pas le format demandÃ© !" ) ;
 			}
 		}
 		catch (Exception e){
 			System.out.println(e.toString());
 		}
+	
 	}
 	
 	
@@ -67,8 +73,7 @@ public class MainPartie2 {
 		}
 		return prix;
 	}
-	
-	// get les clients a partir du fichier text
+			// get les clients a partir du fichier text
 	public static Client [] liresClients (byte []bytes){
 		Client [] clients = new Client [NB_MAX];
 		try{
@@ -87,8 +92,7 @@ public class MainPartie2 {
 		}
 		return clients;
 	}
-	
-	// get Plats du fichier text
+		// get Plats du fichier text
 	public static Plat []  liresPlats (byte []bytes){
 		
 		Plat [] platsList = new Plat [NB_MAX];
@@ -110,7 +114,6 @@ public class MainPartie2 {
 		return platsList;
 	}
 	
-
 	// get les commandes du fichier text 
 	public static Commande []  liresCommandes (byte []bytes){
 		
@@ -139,29 +142,32 @@ public class MainPartie2 {
 			return null; 
 		}
 		return CommandesList;
-	}
-
-	// verifier que toutes les clients de la commande  exist dans la list des clients 
-public static boolean  Erreur(Commande [] com ,Client [] cli ) 
- {
-	boolean trouve =false ;
-	for (int l=0;  l<com.length  && com[l] != null ;l++) 
-	{
-		trouve = false;
-		String nomClient =com[l].getnomClient() ;
-		 for (int k=0;k<cli.length  && cli[k] !=null  ;k++)
-		 {
-			 if (nomClient.equals(cli[k].getNom())) 
+		
+		}
+		
+		
+			// verifier que toutes les clients de la commande  exist dans la list des clients 
+	public static boolean  Erreur(Commande [] com ,Client [] cli ) 
+	 {
+		boolean trouve =false ;
+		for (int l=0;  l<com.length  && com[l] != null ;l++) 
+		{
+			trouve = false;
+			String nomClient =com[l].getnomClient() ;
+			 for (int k=0;k<cli.length  && cli[k] !=null  ;k++)
 			 {
-				 trouve = true;
-				 break;
+				 if (nomClient.equals(cli[k].getNom())) 
+				 {
+					 trouve = true;
+					 break;
+				 }
 			 }
-		 }
-		 if (!trouve) 
-		 {
-			 break; 
-		 }
+			 if (!trouve) 
+			 {
+				 break; 
+			 }
+		}
+		return trouve;
 	}
-	return trouve;
-}
+	
 }
