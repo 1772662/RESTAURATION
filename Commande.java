@@ -1,38 +1,29 @@
-package gestion_restauration;
-
-import exceptions.CommandeException;
-
+package main;
 public class Commande {
 
 	private Client client;
-	private String nomPlat;
-	private int quantite;
+	private String plat;
+	private int qte;
 
 	public Commande() {
 
 	}
 
-	public Commande(Client client, String  nomPlat, int quantite) throws CommandeException {
+	public Commande(Client client, String  plat, int qte) {
 		this.client = client;
-		this.nomPlat = nomPlat;
-		this.quantite = quantite;
+		this.nomPlat = plat;
+		this.qte = qte;
 		
-		if (quantite < 0) {
-			throw new CommandeException("La quantité du plat ne peut pas être négative.");
-		}
 	}
 
-	public String getnomClient () {
+	public String getClient () {
 	return  this.client.getNom() ;
 	}
-	public String getnomPlat () {
+	public String getPlat () {
 		return  this.nomPlat ;
 		}
 	public int getQte () {
-		return  this.quantite ;
+		return  this.qte ;
 		}
-	
-	
-	
 }
 	
