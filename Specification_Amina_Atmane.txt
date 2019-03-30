@@ -1,0 +1,13 @@
+Specification 1:
+Creer le fichier Facture-du-date-heure.txt
+
+Specification 2:
+Verifier si le client et ou le plat n'existe pas dans le fichier Test. (Le fichier de lecture)
+Creation methode pour voir si plat et client existe et une methode pour lire le fichier 
+
+Specification 3:
+Afficher dans le terminal et le fichier Facture-du-date-heure.txt les commandes incorrectes ou
+le client ou le plat n'existe point. Avec les details de la commande. Afficher le tout avant l'affichage de la facture. 
+
+Specification 4:
+Faire des test unitaires qui permettre de voir si un client ou un plat existe ou pas et voir si la lecture du fichier est correcte.
