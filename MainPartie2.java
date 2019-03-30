@@ -54,8 +54,6 @@ try {
 		//
 		
 	}
-
-			
 			
 			// si il n ya pas de commandes 
 			if (commandes != null ) {
@@ -103,8 +101,6 @@ try {
 			}
 	
 	}
-	
-
 	
 
 
@@ -223,19 +219,6 @@ try {
 		return trouve;
 	}
 	
-	/////////////////////////////////////////////////////////////////////////////////////
-	
-	// verifier que un Plat de la commande exist dans la list des
-	// Plats
-	
-	
-	
-	
-	
-	
-	
-	/////////////////////////////////////////////////////////////
-	//Moiiiii
 	
 	public static boolean platExist(Plat[] plt, String nomPlat) {
 		boolean trouve = false;
