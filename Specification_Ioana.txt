@@ -1,0 +1,12 @@
+Specification 1:
+Afficher dans le terminale et la facture la facture
+
+Specification 2:
+Verifier que les factures avec un total de 0.0 $ ne saffiche pas
+
+Specification 3:
+Ajouter dans le montant total la TVQ et TPS pour chaque facture.
+
+Specification 4:
+Verifier que la taxe s'applique reelement.
+
