@@ -14,5 +14,4 @@ Tâches#      Nom du membre        Tâches
 3            Amina Atmane	 - Afficher dans les fichiers de sortie (terminal,Facture-du-date-heure.txt)
 				    toutes les commandes incorrectes.
 				  (Les details de la commande et la raison de l'erreur doivent etre afficher avant les factures) 
-				    avant les factures  			       
-	
+				    avant les factures
