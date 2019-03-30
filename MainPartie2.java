@@ -1,65 +1,112 @@
 package main;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.PrintWriter;
 
 public class MainPartie2 {
 
-	private static final int NB_MAX = 10; //PEUT CHANGER
+	private static final int NB_MAX = 30; 
+	
 
 	public static void main(String[] args) {
 
 		Client[] clients = new Client[NB_MAX];
 		Plat[] plats = new Plat[NB_MAX];
 		Commande[] commandes = new Commande[NB_MAX];
-
+		
+		PrintWriter  writer = null;
+ 
+	
+		byte[] bytes = null ;
 		try {
+			
+			
+		
 			File file = new File("Test.txt");
 			FileInputStream fis = new FileInputStream(file);
-			byte[] bytes = new byte[(int) file.length()]; // WHAT?
+			bytes = new byte[(int) file.length()]; 
 			fis.read(bytes);
 			fis.close();
+			
+			writer = new PrintWriter("Facture-du-date-heure.txt");
+		
+		
+		} catch (Exception e) 
+		{
+			System.out.println("Erreur de lecture du fichier");
+			
+		}
+		
+			clients = liresClients(bytes,NB_MAX);
+	
+			try {
+			plats = liresPlats(bytes,NB_MAX, writer);
+			} catch (NumberFormatException e)
+			{
+				//
+				
+			}	
+try {			
+			commandes = liresCommandes(bytes,NB_MAX);
+	} catch (NumberFormatException e)
+	{
+		//
+		
+	}
 
-			clients = liresClients(bytes);
-			plats = liresPlats(bytes);
-			commandes = liresCommandes(bytes);
 			
-			PrintWriter writer = new PrintWriter("Facture-du-date-heure.txt");
 			
-			String nomPlat = null;
-			
-			// si il n ya pas de commandes ou des erruers dans les commandes
-			if (commandes != null && Erreur(commandes, clients)) {
-				for (int i = 0; i < clients.length && clients[i] != null; i++) {
-					double totalFacture = 0.0;
-					String nomClient = clients[i].getNom();
-
-					for (int l = 0; l < commandes.length && commandes[l] != null; l++) {
-						if (commandes[l].getClient().equals(nomClient)) {
-							int qte = commandes[l].getQte();
-							nomPlat = commandes[l].getPlat();
-							double prix = getPrixduPlat(nomPlat, plats); //CHANGER
-							totalFacture += (qte * prix);
-							
-							if (getPrixduPlat(nomPlat, plats) != 0) {
-								System.out.println(nomClient + " " + totalFacture + "$");
-								
-								writer.println(nomClient + " " + totalFacture + "$");
-								
-							}
-						}
+			// si il n ya pas de commandes 
+			if (commandes != null ) {
+				
+				String nomClient ="";
+				String nomPlat ="";
+	 	double prix=0.0;
+				// Afficher dans le terminal et ecrire les erreurs dans le fichier 
+				for (int l = 0; l < commandes.length && commandes[l] != null; l++) {
+					
+					nomClient = commandes[l].getClient() ;
+					nomPlat   = commandes[l].getPlat() ;
+					prix      = getPrixduPlat(nomPlat, plats); 
+					
+					if (!clientExist(clients, nomClient)) 
+					{
+						System.out.println("Commande incorrecte\n\nLe client "+nomClient +" n'existe pas.");
+						writer.println("Commande incorrecte\n\nLe client "+nomClient +" n'existe pas.");
 					}
 					
+				
+					if (!platExist(plats, nomPlat) ) 
+					{
+						System.out.println("Commande incorrecte\n\nLe Plat "+nomPlat +" n'exit pas.");
+						writer.println("Commande incorrecte\n\nLe Plat "+nomPlat +" n'exit pas.");
+					}
 				}
-				writer.close();
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+					writer.close();
 
+			
 			} else { // message d'erreur dans les commandes
 				System.out.println("Le fichier ne respecte pas le format demandé !");
 			}
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
+	
 	}
+	
+
+	
+
 
 	// get le prix du plan dans la list des plats
 	public static double getPrixduPlat(String nomPlat, Plat[] plats) {
@@ -74,7 +121,7 @@ public class MainPartie2 {
 	}
 
 	// get les clients a partir du fichier text
-	public static Client[] liresClients(byte[] bytes) {
+	public static Client[] liresClients(byte[] bytes, int j) {
 		Client[] clients = new Client[NB_MAX];
 		try {
 			String text = new String(bytes);
@@ -94,29 +141,38 @@ public class MainPartie2 {
 	}
 
 	// get Plats du fichier text
-	public static Plat[] liresPlats(byte[] bytes) {
+	public static Plat[] liresPlats(byte[] bytes, int j, PrintWriter f) {
 
 		Plat[] platsList = new Plat[NB_MAX];
-
-		try {
+		
 			String text = new String(bytes);
 			String plats = text.substring(text.indexOf("Plats :"), text.lastIndexOf("Commandes :"));
 			String[] listesPlats = plats.split("\r\n");
+		     int k=0;
 			for (int i = 1; i < listesPlats.length; i++) {
 				String plat = listesPlats[i].split(" ")[0];
 				String prix = listesPlats[i].split(" ")[1];
+				double d =0.0;
+				try {
+				d=Double.parseDouble(prix) ;
 				Plat p = new Plat(plat, (Double.parseDouble(prix)));
-				platsList[i - 1] = p;
-			}
-
-		} catch (Exception e) {
-			System.out.print(e.toString());
-		}
+				platsList[k] = p;
+				k++;
+				} catch (Exception e) 
+				{
+					System.out.println("Erreur dans la list des plats "+ e.getMessage() );
+					f.println("Erreur dans la list des plats "+ e.getMessage());
+				}
+			   }
+		
 		return platsList;
 	}
+	
+	
+	
 
 	// get les commandes du fichier text
-	public static Commande[] liresCommandes(byte[] bytes) {
+	public static Commande[] liresCommandes(byte[] bytes, int j) {
 
 		Commande[] CommandesList = new Commande[NB_MAX];
 
@@ -163,6 +219,59 @@ public class MainPartie2 {
 			if (!trouve) {
 				break;
 			}
+		}
+		return trouve;
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////
+	
+	// verifier que un Plat de la commande exist dans la list des
+	// Plats
+	
+	
+	
+	
+	
+	
+	
+	/////////////////////////////////////////////////////////////
+	//Moiiiii
+	
+	public static boolean platExist(Plat[] plt, String nomPlat) {
+		boolean trouve = false;
+		for (int l = 0; l < plt.length && plt[l] != null; l++) {
+		    if (nomPlat.equals(plt[l].getNomPlat())) {
+		   		trouve = true;
+				break;
+				}
+		}
+		return trouve;
+	}
+	
+	
+	public static  byte[] lireficher(String nomficher)
+	{
+	byte[] bytes = null ;
+	try{
+	File file = new File(nomficher);
+	FileInputStream fis = new FileInputStream(file);
+	bytes = new byte[(int) file.length()];
+	fis.read(bytes);
+	fis.close();
+	} catch (Exception e)
+	{
+		bytes = null ;
+	}
+	return bytes ;
+	}
+	
+	public static boolean clientExist(Client[] cli, String nomClient) {
+		boolean trouve = false;
+		for (int l = 0; l < cli.length && cli[l] != null; l++) {
+		    if (nomClient.equals(cli[l].getNom())) {
+		   		trouve = true;
+				break;
+				}
 		}
 		return trouve;
 	}
